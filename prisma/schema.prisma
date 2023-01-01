@@ -11,9 +11,32 @@ datasource db {
 }
 
 model Deliveryman {
-  id       String @id @default(uuid())
-  username String @unique
+  id       String     @id @default(uuid())
+  username String     @unique
   password String
+  Delivery Delivery[]
 
   @@map("deliveryman")
+}
+
+model Client {
+  id       String     @id @default(uuid())
+  username String     @unique
+  password String
+  Delivery Delivery[]
+
+  @@map("client")
+}
+
+model Delivery {
+  id             String       @id @default(uuid())
+  item_name      String
+  id_client      String
+  id_deliveryman String?
+  client         Client       @relation(fields: [id_client], references: [id])
+  deliveryman    Deliveryman? @relation(fields: [id_deliveryman], references: [id])
+  crated_at      DateTime     @default(now())
+  end_date       DateTime?
+
+  @@map("delivery")
 }
