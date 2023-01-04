@@ -4,6 +4,7 @@ import CreateClientController from './modules/client/useCases/createClientContro
 import AuthenticateClientController from './modules/account/autheticateClient/AuthenticateClientController'
 import CreateDeliverymanController from './modules/deliveryman/useCases/createDeliveryman/CreateDeliverymanController'
 import AuthenticateDeliverymanController from './modules/account/authenticateDeliveryman/AuthenticateDeliverymanController'
+import CreateDeliveryController from './modules/delivery/useCases/createDelivery/CreateDeliveryController'
 
 const routes = Router()
 
@@ -13,10 +14,14 @@ const authenticateClientController = new AuthenticateClientController()
 const createDeliverymanController = new CreateDeliverymanController()
 const authenticateDeliverymanController = new AuthenticateDeliverymanController()
 
+const createDeliveryController = new CreateDeliveryController()
+
 routes.post('/client', createClientController.handle)
 routes.post('/client/authenticate', authenticateClientController.handle)
 
 routes.post('/deliveryman', createDeliverymanController.handle)
 routes.post('/deliveryman/authenticate', authenticateDeliverymanController.handle)
+
+routes.post('/delivery', createDeliveryController.handle)
 
 export {routes}
