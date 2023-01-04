@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response } from "express";
+import { NextFunction, request, Request, Response } from "express";
 import { verify } from 'jsonwebtoken'
 
 interface IPayload {
@@ -20,9 +20,8 @@ export default async function ensureAuthenticatedClient(req: Request, res: Respo
   const [, token] = authHeader.split(' ')
 
   try {
-    const { sub } = verify(token, 'b1e5de809ac479ffaa492037f3f9dfea');
-    console.log(sub);
-    return next();
+    const { sub } = verify(token, 'b1e5de809ac479ffaa492037f3f9dfea') as IPayload;
+    request.id_client = sub;
 
   } catch (error) {
     return res.status(401).json({
