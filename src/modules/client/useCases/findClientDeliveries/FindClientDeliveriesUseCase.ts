@@ -6,8 +6,10 @@ export default class FindClientDeliveriesUseCase {
       where: {
         id: id_client
       },
-      include:{
-        Delivery:true
+      select:{
+        Delivery:true,
+        id: true,
+        username:true,
       }
     })
 
