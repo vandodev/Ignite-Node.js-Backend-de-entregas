@@ -11,6 +11,7 @@ import ensureAuthenticateDeliveryman from './middlewares/ensureAuthenticatedDeli
 import UpdateDeliverymanController from './modules/delivery/useCases/updateDeliveryman/UpdateDeliverymanController'
 import FindClientDeliveriesController from './modules/client/useCases/findClientDeliveries/FindClientDeliveriesController'
 import FindDeliverymanDeliveriesController from './modules/deliveryman/useCases/findAvailableDeliveries/FindAvailableDeliveriesController'
+import FinishDeliveryController from './modules/delivery/useCases/finishDelivery/FinishDeliveryController'
 
 const routes = Router()
 
@@ -21,6 +22,7 @@ const findClientDeliveries = new FindClientDeliveriesController()
 const createDeliverymanController = new CreateDeliverymanController()
 const authenticateDeliverymanController = new AuthenticateDeliverymanController()
 const findDeliverymanDeliveries = new FindDeliverymanDeliveriesController()
+const finishDeliveryController = new FinishDeliveryController()
 
 const createDeliveryController = new CreateDeliveryController()
 const findAvailableDeliveriesController = new FindAvailableDeliveriesController()
@@ -37,6 +39,7 @@ routes.get('/deliveryman/deliveries', ensureAuthenticateDeliveryman, findDeliver
 routes.post('/delivery', ensureAuthenticatedClient, createDeliveryController.handle)
 routes.get('/delivery/available',ensureAuthenticateDeliveryman ,findAvailableDeliveriesController.handle)
 routes.put('/delivery/updateDeliveryman/:id', ensureAuthenticateDeliveryman, updateDeliverymanController.handle)
+routes.put('/delivery/finish/:id', ensureAuthenticateDeliveryman, finishDeliveryController.handle)//id da entrega aceita
 
 
 export {routes}
